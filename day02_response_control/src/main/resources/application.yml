@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: day02-response-control
+
+server:
+  port: 8080
+
+app:
+  deepseek:
+    base-url: https://api.deepseek.com
+    model: deepseek-flash
+    api-key: ${DEEPSEEK_API_KEY:}
+    timeout: 90s
+    default-max-tokens: 1500

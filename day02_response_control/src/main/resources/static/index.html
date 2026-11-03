@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Day 2 — Response Control Lab</title>
+    <link rel="stylesheet" href="/css/app.css">
+    <script src="/js/app.js" defer></script>
+</head>
+<body>
+<header class="topbar">
+    <a class="brand" href="/">
+        <span class="brand-mark">AI</span>
+        <span>
+            <strong>Advent Challenge</strong>
+            <small>10 поток · день 2</small>
+        </span>
+    </a>
+    <div class="topbar-meta">
+        <span class="status-dot"></span>
+        <span>DeepSeek Flash</span>
+        <span class="divider"></span>
+        <span>REST API</span>
+    </div>
+</header>
+
+<main class="page">
+    <section class="hero">
+        <div>
+            <p class="eyebrow">Эксперимент · контроль ответа</p>
+            <h1>Один запрос.<br><span>Пять уровней контроля.</span></h1>
+            <p class="hero-copy">
+                Сравниваем, как инструкции, лимиты и JSON Schema влияют на возможность
+                автоматически разобрать ответ языковой модели.
+            </p>
+        </div>
+        <div class="hero-note">
+            <span class="note-label">Гипотеза</span>
+            <p>Чем строже контракт, тем меньше места для неоднозначности — но лимиты могут ломать ответ раньше, чем он станет полезным.</p>
+        </div>
+    </section>
+
+    <div class="layout">
+        <aside class="control-card">
+            <div class="section-heading">
+                <span class="step-number">01</span>
+                <div>
+                    <h2>Параметры запуска</h2>
+                    <p>Один запрос проверяется сразу на пяти уровнях контроля.</p>
+                </div>
+            </div>
+
+            <div class="prompt-panel">
+                <label class="prompt-label" for="promptInput">Запрос к модели</label>
+                <textarea id="promptInput" rows="5" maxlength="4000" placeholder="Введите свой запрос…"></textarea>
+                <div class="prompt-meta">
+                    <span id="promptCount">0 / 4000</span>
+                    <button id="resetPrompt" class="text-button" type="button">Вернуть пример</button>
+                </div>
+            </div>
+
+            <div class="run-controls">
+                <label for="repeats">Повторов на вариант</label>
+                <select id="repeats">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3" selected>3</option>
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                </select>
+                <p class="run-hint" id="requestCount">Итого 15 запросов к модели</p>
+            </div>
+
+            <button id="runButton" class="primary-button" type="button" disabled>
+                <span class="button-spinner" aria-hidden="true"></span>
+                <span class="button-label">Запустить сравнение</span>
+            </button>
+            <p class="error-message" id="errorMessage" role="alert"></p>
+
+            <div class="variant-label">Уровни контроля · нажмите, чтобы увидеть запрос</div>
+            <div class="variant-list" id="variantList" aria-label="Варианты эксперимента"></div>
+        </aside>
+
+        <section class="results-area" aria-live="polite">
+            <div id="emptyState" class="empty-state">
+                <div class="empty-orbit">
+                    <span></span><span></span><span></span>
+                </div>
+                <p class="eyebrow">Результаты появятся здесь</p>
+                <h2>Запусти первый прогон</h2>
+                <p>Сервис отправит одинаковый запрос пятью способами и проверит каждый ответ парсером и JSON Schema.</p>
+            </div>
+
+            <div id="runningState" class="running-state hidden">
+                <div class="pulse-ring"></div>
+                <div>
+                    <p class="eyebrow">Эксперимент выполняется</p>
+                    <h2 id="runningTitle">Отправляем запросы…</h2>
+                    <p id="runningMeta">Это может занять до минуты.</p>
+                </div>
+            </div>
+
+            <div id="errorState" class="error-state hidden">
+                <p class="eyebrow">Ошибка выполнения</p>
+                <h2>Эксперимент не завершён</h2>
+                <p id="jobError"></p>
+            </div>
+
+            <div id="report" class="report hidden">
+                <div class="report-head">
+                    <div>
+                        <p class="eyebrow">Итог эксперимента</p>
+                        <h2>Карта надёжности ответов</h2>
+                    </div>
+                    <div class="report-time" id="reportTime"></div>
+                </div>
+
+                <details class="used-prompt">
+                    <summary>Запрос эксперимента</summary>
+                    <p id="reportPrompt"></p>
+                </details>
+
+                <div class="metric-grid" id="metricGrid"></div>
+
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Вариант</th>
+                            <th>JSON напрямую</th>
+                            <th>После очистки</th>
+                            <th>Схема</th>
+                            <th>Токены</th>
+                            <th>Finish reason</th>
+                            <th>Вывод</th>
+                        </tr>
+                        </thead>
+                        <tbody id="summaryBody"></tbody>
+                    </table>
+                </div>
+
+                <div class="details-section">
+                    <div class="section-heading compact">
+                        <span class="step-number">02</span>
+                        <div>
+                            <h2>Что именно вернула модель</h2>
+                            <p>Сырые ответы и ошибки каждого прогона.</p>
+                        </div>
+                    </div>
+                    <div id="runDetails" class="run-details"></div>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+
+<footer class="footer">
+    <span>AI Advent Challenge · Day 02</span>
+    <span>Java 21 · Spring Boot 4.1.2 · JSON Schema</span>
+</footer>
+
+<dialog id="promptDialog" class="prompt-dialog" aria-labelledby="dialogTitle">
+    <div class="dialog-head">
+        <div>
+            <p class="eyebrow">Итоговый запрос уровня контроля</p>
+            <h2 id="dialogTitle"></h2>
+        </div>
+        <button id="closePromptDialog" class="icon-button" type="button" aria-label="Закрыть">×</button>
+    </div>
+    <div id="dialogConfig" class="dialog-config"></div>
+    <pre id="dialogPrompt" class="dialog-prompt"></pre>
+    <button id="dialogDone" class="secondary-button" type="button">Понятно</button>
+</dialog>
+</body>
+</html>
