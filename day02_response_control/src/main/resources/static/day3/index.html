@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Day 3 — Reasoning Lab</title>
+    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/day3/day3.css">
+    <script src="/day3/app.js" defer></script>
+</head>
+<body>
+<header class="topbar">
+    <a class="brand" href="/">
+        <span class="brand-mark">AI</span>
+        <span>
+            <strong>Advent Challenge</strong>
+            <small>10 поток · день 3</small>
+        </span>
+    </a>
+    <div class="topbar-meta">
+        <a class="nav-link" href="/">Day 2</a>
+        <span class="divider"></span>
+        <span class="status-dot"></span>
+        <span>DeepSeek Flash</span>
+        <span class="divider"></span>
+        <span>reasoning lab</span>
+    </div>
+</header>
+
+<main class="page">
+    <section class="hero day3-hero">
+        <div>
+            <p class="eyebrow">Эксперимент · способы рассуждения</p>
+            <h1>Один набор задач.<br><span>Восемь режимов.</span></h1>
+            <p class="hero-copy">
+                Сравниваем четыре способа промптинга при выключенном и максимальном reasoning.
+                Сколько задач решено верно, сколько токенов и времени это стоило.
+            </p>
+        </div>
+        <div class="hero-note">
+            <span class="note-label">Матрица</span>
+            <p>7 задач × 4 способа × 2 режима. Проверка ответов детерминированная, по строке <code>FINAL:</code>.</p>
+        </div>
+    </section>
+
+    <div class="layout">
+        <aside class="control-card">
+            <div class="section-heading">
+                <span class="step-number">01</span>
+                <div>
+                    <h2>Набор задач</h2>
+                    <p>7 задач с известными ответами.</p>
+                </div>
+            </div>
+
+            <div id="taskList" class="task-list">
+                <p class="loading-note">Загрузка задач…</p>
+            </div>
+
+            <div class="protocol-panel">
+                <span class="mini-label">Способы</span>
+                <div id="methodList" class="protocol-list"></div>
+                <span class="mini-label protocol-separator">Режимы</span>
+                <div id="modeList" class="protocol-list"></div>
+            </div>
+
+            <div class="run-summary">
+                <span id="runEstimate">60 запросов к модели</span>
+                <span>≈ 3–8 минут</span>
+            </div>
+
+            <button id="runButton" class="primary-button" type="button" disabled>
+                <span class="button-spinner" aria-hidden="true"></span>
+                <span class="button-label">Запустить эксперимент</span>
+            </button>
+            <p id="errorMessage" class="error-message" role="alert"></p>
+        </aside>
+
+        <section class="results-area" aria-live="polite">
+            <div id="emptyState" class="empty-state">
+                <div class="empty-orbit"><span></span><span></span><span></span></div>
+                <p class="eyebrow">Результаты появятся здесь</p>
+                <h2>Запусти матрицу</h2>
+                <p>Сервис решит семь задач каждым способом при двух настройках reasoning и проверит ответы автоматически.</p>
+            </div>
+
+            <div id="runningState" class="running-state hidden">
+                <div class="pulse-ring"></div>
+                <div>
+                    <p class="eyebrow">Эксперимент выполняется</p>
+                    <h2 id="runningTitle">Отправляем запросы…</h2>
+                    <p id="runningMeta">Это может занять несколько минут.</p>
+                </div>
+            </div>
+
+            <div id="errorState" class="error-state hidden">
+                <p class="eyebrow">Ошибка выполнения</p>
+                <h2>Эксперимент не завершён</h2>
+                <p id="jobError"></p>
+            </div>
+
+            <div id="report" class="report hidden">
+                <div class="report-head">
+                    <div>
+                        <p class="eyebrow">Итог эксперимента</p>
+                        <h2>Способ × рассуждение</h2>
+                    </div>
+                    <div id="reportTime" class="report-time"></div>
+                </div>
+
+                <div id="metricGrid" class="metric-grid"></div>
+
+                <div class="table-wrap">
+                    <table class="reasoning-table">
+                        <thead>
+                        <tr>
+                            <th>Способ</th>
+                            <th>Low: верно</th>
+                            <th>Low: токены / время</th>
+                            <th>High: верно</th>
+                            <th>High: токены / время</th>
+                        </tr>
+                        </thead>
+                        <tbody id="matrixBody"></tbody>
+                    </table>
+                </div>
+
+                <div id="insight" class="insight-box"></div>
+
+                <div class="details-section">
+                    <div class="section-heading compact">
+                        <span class="step-number">02</span>
+                        <div>
+                            <h2>Ответы по задачам</h2>
+                            <p>Раскрой нужный способ и режим, чтобы увидеть проверку и сырой ответ.</p>
+                        </div>
+                    </div>
+                    <div id="details" class="run-details"></div>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+
+<footer class="footer">
+    <span>AI Advent Challenge · Day 03</span>
+    <span>Java 21 · Spring Boot 4.1.2 · deterministic evaluation</span>
+</footer>
+</body>
+</html>

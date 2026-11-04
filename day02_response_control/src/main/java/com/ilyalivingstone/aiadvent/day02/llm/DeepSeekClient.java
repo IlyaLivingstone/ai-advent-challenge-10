@@ -35,6 +35,17 @@ public class DeepSeekClient {
             List<String> stop,
             boolean jsonMode
     ) {
+        return complete(prompt, maxTokens, stop, jsonMode, null, null);
+    }
+
+    public ChatCompletionResponse complete(
+            String prompt,
+            Integer maxTokens,
+            List<String> stop,
+            boolean jsonMode,
+            String reasoningEffort,
+            ChatCompletionRequest.Thinking thinking
+    ) {
         if (!properties.hasApiKey()) {
             throw new DeepSeekException("DEEPSEEK_API_KEY не задан");
         }
@@ -48,7 +59,9 @@ public class DeepSeekClient {
                 maxTokens == null ? properties.defaultMaxTokens() : maxTokens,
                 stop == null || stop.isEmpty() ? null : List.copyOf(stop),
                 jsonMode ? ChatCompletionRequest.ResponseFormat.jsonObject() : null,
-                false
+                false,
+                reasoningEffort,
+                thinking
         );
 
         try {
