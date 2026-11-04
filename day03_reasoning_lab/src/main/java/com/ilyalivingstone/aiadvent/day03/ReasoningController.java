@@ -1,6 +1,6 @@
 package com.ilyalivingstone.aiadvent.day03;
 
-import com.ilyalivingstone.aiadvent.day02.llm.DeepSeekProperties;
+import com.ilyalivingstone.aiadvent.day03.llm.DeepSeekProperties;
 import java.util.Arrays;
 import java.util.List;
 import org.springframework.http.HttpStatus;

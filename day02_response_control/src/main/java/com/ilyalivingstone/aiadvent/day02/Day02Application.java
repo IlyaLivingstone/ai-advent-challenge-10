@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 
-@SpringBootApplication(scanBasePackages = "com.ilyalivingstone.aiadvent")
+@SpringBootApplication
 @ConfigurationPropertiesScan
 public class Day02Application {
 

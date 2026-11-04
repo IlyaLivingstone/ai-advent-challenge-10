@@ -1,9 +1,9 @@
 package com.ilyalivingstone.aiadvent.day03;
 
-import com.ilyalivingstone.aiadvent.day02.llm.ChatCompletionRequest;
-import com.ilyalivingstone.aiadvent.day02.llm.ChatCompletionResponse;
-import com.ilyalivingstone.aiadvent.day02.llm.DeepSeekClient;
-import com.ilyalivingstone.aiadvent.day02.llm.DeepSeekProperties;
+import com.ilyalivingstone.aiadvent.day03.llm.ChatCompletionRequest;
+import com.ilyalivingstone.aiadvent.day03.llm.ChatCompletionResponse;
+import com.ilyalivingstone.aiadvent.day03.llm.DeepSeekClient;
+import com.ilyalivingstone.aiadvent.day03.llm.DeepSeekProperties;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;

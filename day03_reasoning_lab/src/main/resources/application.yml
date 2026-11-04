@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: day03-reasoning-lab
+
+server:
+  port: 8081
+
+app:
+  deepseek:
+    base-url: https://api.deepseek.com
+    model: deepseek-flash
+    api-key: ${DEEPSEEK_API_KEY:}
+    timeout: 180s
+    default-max-tokens: 16000
