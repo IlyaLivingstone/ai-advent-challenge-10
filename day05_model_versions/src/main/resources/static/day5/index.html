@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Day 5 — Model Versions</title>
+    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/day5/day5.css">
+    <script src="/day5/app.js" defer></script>
+</head>
+<body>
+<header class="topbar">
+    <a class="brand" href="/"><span class="brand-mark">AI</span><span><strong>Advent Challenge</strong><small>10 поток · день 5</small></span></a>
+    <div class="topbar-meta"><span class="status-dot"></span><span>3 модели</span><span class="divider"></span><span>model versions</span></div>
+</header>
+<main class="page">
+    <section class="hero day5-hero">
+        <div>
+            <p class="eyebrow">Эксперимент · версии моделей</p>
+            <h1>Три модели.<br><span>Семь задач.</span></h1>
+            <p class="hero-copy">Одинаковые задачи на локальной Qwen 3B, DeepSeek Flash и Kimi K3.1 Pro. Сравниваем точность, скорость, токены и стоимость.</p>
+        </div>
+        <div class="hero-note"><span class="note-label">Протокол</span><p>7 задач × 3 модели. Каждая модель предварительно прогревается; замеры — по одному запросу на задачу.</p></div>
+    </section>
+    <div class="layout">
+        <aside class="control-card">
+            <div class="section-heading"><span class="step-number">01</span><div><h2>Протокол</h2><p>Задачи из Дня 3, единый evaluator.</p></div></div>
+            <div id="taskList" class="task-list"><p class="loading-note">Загрузка…</p></div>
+            <div class="protocol-panel"><span class="mini-label">Модели</span><div id="modelList" class="model-list"></div></div>
+            <div class="run-summary"><span id="runEstimate">21 запрос</span><span>+ прогрев</span></div>
+            <button id="runButton" class="primary-button" type="button" disabled><span class="button-spinner"></span><span class="button-label">Запустить</span></button>
+            <p id="errorMessage" class="error-message" role="alert"></p>
+        </aside>
+        <section class="results-area" aria-live="polite">
+            <div id="emptyState" class="empty-state"><div class="empty-orbit"><span></span><span></span><span></span></div><p class="eyebrow">Результаты появятся здесь</p><h2>Сравни модели</h2><p>Сервис выполнит 21 замер и покажет, где маленькой модели достаточно.</p></div>
+            <div id="runningState" class="running-state hidden"><div class="pulse-ring"></div><div><p class="eyebrow">Эксперимент выполняется</p><h2 id="runningTitle">Опрашиваем модели…</h2><p id="runningMeta">Это может занять несколько минут.</p></div></div>
+            <div id="errorState" class="error-state hidden"><p class="eyebrow">Ошибка выполнения</p><h2>Эксперимент не завершён</h2><p id="jobError"></p></div>
+            <div id="report" class="report hidden">
+                <div class="report-head"><div><p class="eyebrow">Итог эксперимента</p><h2>Модель × задача</h2></div><div id="reportTime" class="report-time"></div></div>
+                <div id="metricGrid" class="metric-grid"></div>
+                <div class="table-wrap"><table class="model-table"><thead><tr><th>Модель</th><th>Верно</th><th>Время</th><th>Токены</th><th>Стоимость</th></tr></thead><tbody id="matrixBody"></tbody></table></div>
+                <div id="insight" class="insight-box"></div>
+                <div class="details-section"><div class="section-heading compact"><span class="step-number">02</span><div><h2>Ответы по задачам</h2><p>Раскрой модель, чтобы увидеть семь ответов.</p></div></div><div id="details" class="run-details"></div></div>
+            </div>
+        </section>
+    </div>
+</main>
+<footer class="footer"><span>AI Advent Challenge · Day 05</span><span>Java 21 · Spring Boot 4.1.2 · model benchmark</span></footer>
+</body>
+</html>

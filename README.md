@@ -33,3 +33,10 @@ Spring Boot-сервис сравнивает один запрос на пят�
 - [Код и инструкция](day04_temperature_lab/README.md)
 - [Видеодемонстрация](day04_temperature_lab/demo.mp4)
 - Отдельный сервис: `http://localhost:8082/`
+
+### Задание 5. Версии моделей
+
+Одинаковые 7 задач на локальной Qwen 3B, DeepSeek Flash и Kimi K3.1 Pro: точность, время, токены и стоимость.
+
+- [Код и инструкция](day05_model_versions/README.md)
+- Отдельный сервис: `http://localhost:8083/`
