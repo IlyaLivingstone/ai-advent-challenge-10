@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: day04-temperature-lab
+
+server:
+  port: 8082
+
+app:
+  deepseek:
+    base-url: https://api.deepseek.com
+    model: deepseek-flash
+    api-key: ${DEEPSEEK_API_KEY:}
+    timeout: 120s
+    default-max-tokens: 600

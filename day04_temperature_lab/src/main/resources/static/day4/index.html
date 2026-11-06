@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Day 4 — Temperature Lab</title>
+    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/day4/day4.css">
+    <script src="/day4/app.js" defer></script>
+</head>
+<body>
+<header class="topbar">
+    <a class="brand" href="/">
+        <span class="brand-mark">AI</span>
+        <span>
+            <strong>Advent Challenge</strong>
+            <small>10 поток · день 4</small>
+        </span>
+    </a>
+    <div class="topbar-meta">
+        <span class="status-dot"></span>
+        <span>DeepSeek Flash</span>
+        <span class="divider"></span>
+        <span>temperature lab</span>
+    </div>
+</header>
+
+<main class="page">
+    <section class="hero day4-hero">
+        <div>
+            <p class="eyebrow">Эксперимент · температура</p>
+            <h1>Один ответ.<br><span>Три температуры.</span></h1>
+            <p class="hero-copy">
+                Один правильный ответ и генерация названий при temperature 0, 0.7 и 1.2.
+                По десять прогонов на каждую комбинацию: проверяем разброс, формат и ошибки.
+            </p>
+        </div>
+        <div class="hero-note">
+            <span class="note-label">Матрица</span>
+            <p>2 задачи × 3 температуры × 10 прогонов. У точной задачи ответ проверяется автоматически, у генерации — формат и разнообразие.</p>
+        </div>
+    </section>
+
+    <div class="layout">
+        <aside class="control-card">
+            <div class="section-heading">
+                <span class="step-number">01</span>
+                <div>
+                    <h2>Протокол</h2>
+                    <p>Два типа запросов, три температуры.</p>
+                </div>
+            </div>
+            <div id="taskList" class="task-list"><p class="loading-note">Загрузка…</p></div>
+            <div class="protocol-panel">
+                <span class="mini-label">Температуры</span>
+                <div id="temperatureList" class="protocol-list"></div>
+                <span class="mini-label protocol-separator">Повторы</span>
+                <div class="protocol-list"><span class="protocol-chip">10 прогонов</span></div>
+            </div>
+            <div class="run-summary">
+                <span id="runEstimate">60 запросов к модели</span>
+                <span>≈ 1–3 минуты</span>
+            </div>
+            <button id="runButton" class="primary-button" type="button" disabled>
+                <span class="button-spinner" aria-hidden="true"></span>
+                <span class="button-label">Запустить эксперимент</span>
+            </button>
+            <p id="errorMessage" class="error-message" role="alert"></p>
+        </aside>
+
+        <section class="results-area" aria-live="polite">
+            <div id="emptyState" class="empty-state">
+                <div class="empty-orbit"><span></span><span></span><span></span></div>
+                <p class="eyebrow">Результаты появятся здесь</p>
+                <h2>Запусти температуру</h2>
+                <p>Сервис выполнит 60 запросов и сравнит ответы между прогонами.</p>
+            </div>
+
+            <div id="runningState" class="running-state hidden">
+                <div class="pulse-ring"></div>
+                <div>
+                    <p class="eyebrow">Эксперимент выполняется</p>
+                    <h2 id="runningTitle">Отправляем запросы…</h2>
+                    <p id="runningMeta">Это может занять несколько минут.</p>
+                </div>
+            </div>
+
+            <div id="errorState" class="error-state hidden">
+                <p class="eyebrow">Ошибка выполнения</p>
+                <h2>Эксперимент не завершён</h2>
+                <p id="jobError"></p>
+            </div>
+
+            <div id="report" class="report hidden">
+                <div class="report-head">
+                    <div>
+                        <p class="eyebrow">Итог эксперимента</p>
+                        <h2>Тип задачи × температура</h2>
+                    </div>
+                    <div id="reportTime" class="report-time"></div>
+                </div>
+                <div id="metricGrid" class="metric-grid"></div>
+                <div id="zeroBanner" class="zero-banner"></div>
+                <div class="table-wrap">
+                    <table class="temperature-table">
+                        <thead>
+                        <tr>
+                            <th>Запрос</th>
+                            <th>t = 0</th>
+                            <th>t = 0.7</th>
+                            <th>t = 1.2</th>
+                        </tr>
+                        </thead>
+                        <tbody id="matrixBody"></tbody>
+                    </table>
+                </div>
+                <div id="insight" class="insight-box"></div>
+                <div class="details-section">
+                    <div class="section-heading compact">
+                        <span class="step-number">02</span>
+                        <div>
+                            <h2>Примеры ответов</h2>
+                            <p>Все десять прогонов для каждой температуры.</p>
+                        </div>
+                    </div>
+                    <div id="details" class="run-details"></div>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+<footer class="footer">
+    <span>AI Advent Challenge · Day 04</span>
+    <span>Java 21 · Spring Boot 4.1.2 · temperature comparison</span>
+</footer>
+</body>
+</html>

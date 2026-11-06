@@ -1,0 +1,574 @@
+.nav-link {
+    color: var(--mint);
+    text-decoration: none;
+}
+
+.nav-link:hover {
+    color: #a1f8de;
+}
+
+.day3-hero h1 {
+    font-size: clamp(40px, 4.9vw, 68px);
+}
+
+.task-list {
+    display: grid;
+    gap: 7px;
+    max-height: 308px;
+    margin: 20px 0 18px;
+    overflow: auto;
+    padding-right: 3px;
+}
+
+.task-item {
+    padding: 10px 11px;
+    border: 1px solid var(--line);
+    border-radius: 11px;
+    background: rgba(255, 255, 255, 0.025);
+}
+
+.task-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: center;
+}
+
+.task-number {
+    color: var(--mint);
+    font-family: var(--mono);
+    font-size: 9px;
+}
+
+.task-title {
+    color: var(--text);
+    font-size: 12px;
+    font-weight: 550;
+}
+
+.task-category {
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 9px;
+}
+
+.task-question {
+    display: -webkit-box;
+    margin: 6px 0 0;
+    overflow: hidden;
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.45;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.protocol-panel {
+    padding: 13px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.14);
+}
+
+.mini-label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.protocol-separator {
+    margin-top: 14px;
+}
+
+.protocol-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.protocol-chip {
+    padding: 4px 7px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--muted-strong);
+    font-family: var(--mono);
+    font-size: 9px;
+}
+
+.protocol-chip.mode {
+    color: var(--amber);
+    border-color: rgba(243, 198, 111, 0.24);
+}
+
+.run-summary {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin: 17px 0 0;
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 9px;
+}
+
+.loading-note {
+    margin: 0;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.reasoning-table {
+    min-width: 760px;
+}
+
+.reasoning-table td {
+    vertical-align: top;
+}
+
+.method-cell {
+    min-width: 180px;
+}
+
+.method-cell strong {
+    display: block;
+    color: var(--text);
+    font-size: 12px;
+    font-weight: 550;
+}
+
+.method-cell small {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 9px;
+}
+
+.cell-accuracy {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.accuracy-number {
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 12px;
+}
+
+.accuracy-bar {
+    width: 58px;
+    height: 4px;
+    overflow: hidden;
+    border-radius: 99px;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.accuracy-fill {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: var(--mint);
+}
+
+.accuracy-fill.low {
+    background: var(--amber);
+}
+
+.cell-stats {
+    display: block;
+    margin-top: 7px;
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 9px;
+    line-height: 1.5;
+}
+
+.mode-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 9px;
+}
+
+.mode-label::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--amber);
+}
+
+.mode-label.high::before {
+    background: var(--mint);
+}
+
+.insight-box {
+    margin-top: 18px;
+    padding: 17px 18px;
+    border: 1px solid rgba(104, 233, 196, 0.18);
+    border-radius: 14px;
+    color: var(--muted-strong);
+    background: linear-gradient(120deg, rgba(104, 233, 196, 0.07), rgba(121, 184, 255, 0.03));
+    font-size: 12px;
+    line-height: 1.65;
+}
+
+.insight-box strong {
+    color: var(--mint);
+}
+
+.insight-title {
+    margin-bottom: 7px;
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.insight-box p {
+    margin: 0;
+}
+
+.reasoning-details {
+    display: grid;
+    gap: 9px;
+}
+
+.reasoning-details .run-card {
+    padding: 13px;
+}
+
+.task-answer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    align-items: center;
+    margin: 8px 0;
+}
+
+.task-answer strong {
+    color: var(--text);
+    font-size: 11px;
+}
+
+.task-answer span {
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 10px;
+}
+
+.expected-answer {
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 9px;
+}
+
+@media (max-width: 720px) {
+    .task-list {
+        max-height: 260px;
+    }
+
+    .reasoning-table {
+        min-width: 680px;
+    }
+}
+
+.day4-hero h1 {
+    font-size: clamp(40px, 4.9vw, 68px);
+}
+
+.temperature-table {
+    min-width: 760px;
+}
+
+.temperature-table td {
+    vertical-align: top;
+    padding: 16px 14px;
+}
+
+.task-cell {
+    min-width: 190px;
+}
+
+.task-cell strong {
+    display: block;
+    color: var(--text);
+    font-size: 12px;
+    font-weight: 550;
+}
+
+.task-cell small {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 9px;
+    line-height: 1.4;
+}
+
+.temp-cell {
+    min-width: 160px;
+}
+
+.temp-score {
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 13px;
+}
+
+.temp-score .ok {
+    color: var(--mint);
+}
+
+.temp-score .bad {
+    color: #ff9f9a;
+}
+
+.temp-sub {
+    display: block;
+    margin-top: 5px;
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 9px;
+    line-height: 1.55;
+}
+
+.zero-banner {
+    margin: 15px 0 0;
+    padding: 10px 13px;
+    border: 1px solid rgba(104, 233, 196, 0.18);
+    border-radius: 10px;
+    color: var(--muted-strong);
+    background: rgba(104, 233, 196, 0.055);
+    font-family: var(--mono);
+    font-size: 10px;
+    line-height: 1.5;
+}
+
+.zero-banner strong {
+    color: var(--mint);
+}
+
+.temperature-details .run-card {
+    padding: 13px;
+}
+
+.run-index {
+    color: var(--mint);
+    font-family: var(--mono);
+    font-size: 9px;
+}
+
+.creative-names {
+    margin: 9px 0;
+    padding: 9px 10px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    color: var(--text);
+    background: rgba(255,255,255,0.025);
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+.matrix-task-row td {
+    background: rgba(255,255,255,0.012);
+}
+
+/* Video-readable typography: larger text survives MP4 compression. */
+.topbar-meta {
+    font-size: 13px;
+}
+
+.brand strong {
+    font-size: 16px;
+}
+
+.brand small {
+    font-size: 12px;
+}
+
+.hero-copy {
+    font-size: 18px;
+    line-height: 1.65;
+}
+
+.hero-note p {
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.note-label {
+    font-size: 12px;
+}
+
+.section-heading h2 {
+    font-size: 21px;
+}
+
+.section-heading p {
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.task-number,
+.task-category {
+    font-size: 11px;
+}
+
+.task-title {
+    font-size: 15px;
+}
+
+.task-question {
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.task-list {
+    max-height: 360px;
+}
+
+.mini-label {
+    font-size: 11px;
+}
+
+.protocol-chip {
+    padding: 5px 9px;
+    font-size: 12px;
+}
+
+.run-summary {
+    font-size: 11px;
+}
+
+.primary-button {
+    font-size: 16px;
+    padding: 15px 18px;
+}
+
+.report-head h2 {
+    font-size: 34px;
+}
+
+.report-time {
+    font-size: 12px;
+}
+
+.metric-label {
+    font-size: 11px;
+    line-height: 1.35;
+}
+
+.metric-value {
+    font-size: 30px;
+}
+
+.table-wrap {
+    overflow-x: auto;
+}
+
+.temperature-table {
+    min-width: 900px;
+}
+
+.temperature-table th {
+    font-size: 11px;
+    padding: 15px 14px;
+}
+
+.temperature-table td {
+    font-size: 14px;
+    padding: 17px 15px;
+}
+
+.task-cell {
+    min-width: 210px;
+}
+
+.task-cell strong {
+    font-size: 16px;
+}
+
+.task-cell small {
+    font-size: 12px;
+    line-height: 1.45;
+}
+
+.temp-cell {
+    min-width: 180px;
+}
+
+.temp-score {
+    font-size: 18px;
+}
+
+.temp-sub {
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.zero-banner {
+    font-size: 13px;
+    line-height: 1.55;
+    padding: 12px 15px;
+}
+
+.insight-box {
+    font-size: 15px;
+    line-height: 1.65;
+}
+
+.insight-title {
+    font-size: 11px;
+}
+
+.run-group-title {
+    font-size: 15px;
+}
+
+.run-group-meta {
+    font-size: 12px;
+}
+
+.run-group summary {
+    padding: 15px 16px;
+}
+
+.run-index,
+.run-stat {
+    font-size: 11px;
+}
+
+.creative-names {
+    font-size: 13px;
+    line-height: 1.65;
+}
+
+.run-card pre {
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.run-error {
+    font-size: 12px;
+}
+
+.badge {
+    font-size: 11px;
+    padding: 4px 7px;
+}
+
+.footer {
+    font-size: 12px;
+}
+
+@media (max-width: 900px) {
+    .temperature-table {
+        min-width: 820px;
+    }
+}
