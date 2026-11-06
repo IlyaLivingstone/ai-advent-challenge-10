@@ -39,4 +39,5 @@ Spring Boot-сервис сравнивает один запрос на пят�
 Одинаковые 7 задач на локальной Qwen 3B, DeepSeek Flash и Kimi K3.1 Pro: точность, время, токены и стоимость.
 
 - [Код и инструкция](day05_model_versions/README.md)
+- [Видеодемонстрация](day05_model_versions/demo.mp4)
 - Отдельный сервис: `http://localhost:8083/`
