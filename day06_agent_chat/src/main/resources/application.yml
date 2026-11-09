@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: day06-agent-chat
+
+server:
+  port: 8084
+
+app:
+  deepseek:
+    base-url: https://api.deepseek.com
+    model: deepseek-flash
+    api-key: ${DEEPSEEK_API_KEY:}
+    timeout: 90s
+    default-max-tokens: 2000

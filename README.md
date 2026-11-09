@@ -41,3 +41,10 @@ Spring Boot-сервис сравнивает один запрос на пят�
 - [Код и инструкция](day05_model_versions/README.md)
 - [Видеодемонстрация](day05_model_versions/demo.mp4)
 - Отдельный сервис: `http://localhost:8083/`
+
+### Задание 6. Первый агент
+
+Чат с агентом, который сам вызывает `current_time`, `calculate` и `convert_currency`, получает результаты и формулирует финальный ответ.
+
+- [Код и инструкция](day06_agent_chat/README.md)
+- Отдельный сервис: `http://localhost:8084/`

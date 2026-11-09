@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Day 6 — Agent Chat</title>
+    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/day6/day6.css">
+    <script src="/day6/app.js" defer></script>
+</head>
+<body>
+<header class="topbar">
+    <a class="brand" href="/"><span class="brand-mark">AI</span><span><strong>Advent Challenge</strong><small>10 поток · день 6</small></span></a>
+    <div class="topbar-meta"><span class="status-dot"></span><span>DeepSeek Flash</span><span class="divider"></span><span>agent chat</span></div>
+</header>
+<main class="page">
+    <section class="hero agent-hero">
+        <div><p class="eyebrow">Агент · инструменты · чат</p><h1>Спроси. Агент<br><span>сам вызовет инструмент.</span></h1><p class="hero-copy">Чат с агентом: модель решает, когда нужны текущее время, калькулятор или конвертер валют, получает результат и формулирует финальный ответ.</p></div>
+        <div class="hero-note"><span class="note-label">Инструменты</span><p>current_time · calculate · convert_currency</p></div>
+    </section>
+    <div class="chat-shell">
+        <aside class="chat-side">
+            <div class="section-heading"><span class="step-number">01</span><div><h2>Примеры</h2><p>Проверка агентского цикла.</p></div></div>
+            <button class="example-button" data-prompt="Объясни, что такое AI-агент">Без инструментов</button>
+            <button class="example-button" data-prompt="Который час в Москве?">Один инструмент</button>
+            <button class="example-button" data-prompt="Переведи 5000 рублей в доллары, затем увеличь результат на 10%.">Два инструмента подряд</button>
+            <div class="tools-note"><span class="mini-label">Доступно агенту</span><div id="toolList" class="tool-list"></div></div>
+            <button id="resetButton" class="ghost-button" type="button">Новый чат</button>
+        </aside>
+        <section class="chat-panel">
+            <div class="chat-head"><div><p class="eyebrow">Сессия</p><h2>Диалог с агентом</h2></div><span id="chatStatus" class="chat-status">готов</span></div>
+            <div id="messages" class="messages"><div class="chat-empty"><p>Напиши сообщение или выбери пример слева.</p></div></div>
+            <form id="chatForm" class="composer"><textarea id="messageInput" rows="2" placeholder="Например: Который час в Москве и сколько будет 2500 рублей в долларах?"></textarea><button id="sendButton" class="primary-button" type="submit">Отправить</button></form>
+            <p id="chatError" class="error-message" role="alert"></p>
+        </section>
+    </div>
+</main>
+<footer class="footer"><span>AI Advent Challenge · Day 06</span><span>Spring Boot 4.1.2 · SSE · tool calling</span></footer>
+</body>
+</html>
