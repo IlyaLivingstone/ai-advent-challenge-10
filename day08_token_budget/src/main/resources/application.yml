@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: day08-token-budget
+
+server:
+  port: 8086
+
+app:
+  agent:
+    storage-dir: ${AGENT_STORAGE_DIR:data/sessions}
+    context-limit-tokens: ${AGENT_CONTEXT_LIMIT:128000}
+    model-context-limit: 1000000
+    input-price-per-million: 0.30
+    output-price-per-million: 1.20
+  deepseek:
+    base-url: https://api.deepseek.com
+    model: deepseek-flash
+    api-key: ${DEEPSEEK_API_KEY:}
+    timeout: 90s
+    default-max-tokens: 2000

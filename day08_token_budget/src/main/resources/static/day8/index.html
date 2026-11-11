@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Day 8 — Context Persistence</title>
+    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/day8/day8.css">
+    <script src="/day8/app.js" defer></script>
+</head>
+<body>
+<header class="topbar">
+    <a class="brand" href="/"><span class="brand-mark">AI</span><span><strong>Advent Challenge</strong><small>10 поток · день 8</small></span></a>
+    <div class="topbar-meta"><span class="status-dot"></span><span>DeepSeek Flash</span><span class="divider"></span><span>agent chat</span></div>
+</header>
+<main class="page">
+    <section class="hero agent-hero">
+        <div><p class="eyebrow">Агент · сохранение контекста</p><h1>Спроси. Агент<br><span>сам вызовет инструмент.</span></h1><p class="hero-copy">Агент с памятью: модель решает, когда нужны текущее время, калькулятор или конвертер валют, получает результат и формулирует финальный ответ.</p></div>
+        <div class="hero-note"><span class="note-label">Инструменты</span><p>current_time · calculate · convert_currency</p></div>
+    </section>
+    <div class="chat-shell">
+        <aside class="chat-side">
+            <div class="section-heading"><span class="step-number">01</span><div><h2>Примеры</h2><p>Проверка агентского цикла.</p></div></div>
+            <button class="example-button" data-prompt="Объясни, что такое AI-агент">Без инструментов</button>
+            <button class="example-button" data-prompt="Который час в Москве?">Один инструмент</button>
+            <button class="example-button" data-prompt="Переведи 5000 рублей в доллары, затем увеличь результат на 10%.">Два инструмента подряд</button>
+            <button id="stressButton" class="example-button stress-button" type="button" disabled title="Отправляет синтетическую сказку примерно на 1 млн токенов">Сказка про колобка (~1M токенов)</button>
+            <div class="tools-note"><span class="mini-label">Доступно агенту</span><div id="toolList" class="tool-list"></div></div>
+            <label class="gate-toggle"><input id="gateToggle" type="checkbox"> <span>Снять гейт сервиса</span><small id="gateHint">лимит 1 800</small></label>
+            <div class="token-panel">
+                <div class="token-head"><span class="mini-label">Токены</span><span id="tokenLimit">—</span></div>
+                <div class="token-grid">
+                    <span>Запрос <b id="currentTokens">—</b></span>
+                    <span>Контекст <b id="historyTokens">—</b></span>
+                    <span>Ответ <b id="responseTokens">—</b></span>
+                    <span title="Сумма всех вызовов за сессию; не ограничивается контекстным лимитом">За сессию <b id="totalTokens">—</b></span>
+                    <span>Вызов <b id="callCost">—</b></span>
+                    <span title="Накопительная стоимость сессии">Σ стоимость <b id="sessionCost">—</b></span>
+                </div>
+                <div class="context-bar"><span id="contextFill"></span></div>
+                <span id="tokenFoot" class="token-foot">Лимит относится к контексту, «За сессию» — накопительно.</span>
+                <div class="token-failed"><span>Отклонено <b id="failedCount">0</b></span><span>без списания</span></div>
+                <div id="tokenTimeline" class="token-timeline"><p class="token-empty">График появится после первого вызова.</p></div>
+            </div>
+            <button id="resetButton" class="ghost-button" type="button">Новый чат</button>
+            <button id="restartButton" class="ghost-button restart-button" type="button">Перезапустить сервис</button>
+        </aside>
+        <section class="chat-panel">
+            <div class="chat-head"><div><p class="eyebrow">Сессия</p><h2>Диалог с агентом</h2></div><span id="chatStatus" class="chat-status">готов</span></div>
+            <div id="messages" class="messages"><div class="chat-empty"><p>Напиши сообщение или выбери пример слева.</p></div></div>
+            <form id="chatForm" class="composer"><textarea id="messageInput" rows="2" placeholder="Например: Который час в Москве и сколько будет 2500 рублей в долларах?"></textarea><button id="sendButton" class="primary-button" type="submit">Отправить</button></form>
+            <p id="chatError" class="error-message" role="alert"></p>
+        </section>
+    </div>
+</main>
+<footer class="footer"><span>AI Advent Challenge · Day 06</span><span>Spring Boot 4.1.2 · SSE · tool calling</span></footer>
+</body>
+</html>
