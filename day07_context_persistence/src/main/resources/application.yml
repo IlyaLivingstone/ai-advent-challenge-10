@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: day07-context-persistence
+
+server:
+  port: 8085
+
+app:
+  agent:
+    storage-dir: ${AGENT_STORAGE_DIR:data/sessions}
+  deepseek:
+    base-url: https://api.deepseek.com
+    model: deepseek-flash
+    api-key: ${DEEPSEEK_API_KEY:}
+    timeout: 90s
+    default-max-tokens: 2000
