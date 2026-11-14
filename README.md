@@ -77,4 +77,5 @@ Sliding Window, Sticky Facts и Summary + ветвление диалога с �
 
 - [Код и инструкция](day10_context_strategies/README.md)
 - [Видеодемонстрация](day10_context_strategies/demo10.mp4)
+- [Результаты эксперимента](day10_context_strategies/experiment-report.png)
 - Отдельный сервис: `http://localhost:8088/`
