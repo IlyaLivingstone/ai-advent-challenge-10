@@ -70,3 +70,11 @@ Spring Boot-сервис сравнивает один запрос на пят�
 - [Код и инструкция](day09_context_compression/README.md)
 - [Видеодемонстрация](day09_context_compression/demo9.mp4)
 - Отдельный сервис: `http://localhost:8087/`
+
+### Задание 10. Сравнение стратегий контекста
+
+Sliding Window, Sticky Facts и Summary + ветвление диалога с чекпоинтами.
+
+- [Код и инструкция](day10_context_strategies/README.md)
+- [Видеодемонстрация](day10_context_strategies/demo10.mp4)
+- Отдельный сервис: `http://localhost:8088/`
