@@ -79,3 +79,11 @@ Sliding Window, Sticky Facts и Summary + ветвление диалога с �
 - [Видеодемонстрация](day10_context_strategies/demo10.mp4)
 - [Результаты эксперимента](day10_context_strategies/experiment-report.png)
 - Отдельный сервис: `http://localhost:8088/`
+
+### Задание 11. Модель памяти ассистента
+
+Три независимых слоя памяти: краткосрочная, рабочая и долговременная.
+
+- [Код и инструкция](day11_memory_layers/README.md)
+- [Видеодемонстрация](day11_memory_layers/demo11.mp4)
+- Отдельный сервис: `http://localhost:8089/`
