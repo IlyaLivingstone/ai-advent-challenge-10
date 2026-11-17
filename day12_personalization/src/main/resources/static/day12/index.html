@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Day 12 — Personalization</title>
+<link rel="stylesheet" href="/css/app.css"><link rel="stylesheet" href="/day12/day12.css?v=26">
+<script src="/day12/app.js?v=26" defer></script>
+</head>
+<body>
+<header class="topbar"><a class="brand" href="/"><span class="brand-mark">AI</span><span><strong>Advent Challenge</strong><small>10 поток · день 12</small></span></a><div class="topbar-meta"><span class="status-dot"></span><span>personalization</span></div></header>
+<div class="workspace">
+<aside id="sessionsPanel" class="side-panel sessions-panel"><div class="panel-head"><span class="panel-kicker">Сессии</span><button id="newSessionButton" class="icon-button" title="Новая сессия">+</button></div><div id="sessionList" class="session-list"></div><div class="panel-foot"><span id="sessionMeta">—</span></div></aside>
+<main class="chat-column">
+<div class="chat-toolbar"><div class="toolbar-left"><button id="toggleSessions" class="toolbar-button" type="button">☰ Сессии</button><button id="memoryPanelButton" class="toolbar-button" type="button">Память</button><button id="profilePanelButton" class="toolbar-button" type="button">Профиль</button></div><div class="toolbar-center"><button id="reportButton" class="toolbar-button report-button" type="button">Итоговый отчет по экспериментам</button></div><div class="toolbar-right"><span id="chatStatus" class="chat-status">готов</span><button id="branchLastButton" class="toolbar-button" type="button">Ветка от последнего</button><button id="restartButton" class="toolbar-button" type="button">Перезапустить</button></div></div>
+<div class="chat-head"><div><p class="eyebrow">Сессия</p><h1>Персонализация ассистента</h1></div><div id="compressionBadge" class="compression-badge">сжатие вкл</div></div>
+<div id="messages" class="messages"><div class="chat-empty"><strong>Начни диалог</strong><p>Сообщения, reasoning, вызовы инструментов и API-трассы появятся здесь.</p></div></div>
+<form id="chatForm" class="composer"><textarea id="messageInput" rows="2" placeholder="Напиши сообщение…"></textarea><button id="sendButton" class="primary-button" type="submit">Отправить</button></form>
+<p id="chatError" class="error-message" role="alert"></p>
+</main>
+
+<aside id="experimentPanel" class="side-panel experiment-panel"><div class="panel-head"><span id="panelTitle" class="panel-kicker">Память</span><button id="closeExperiment" class="icon-button" title="Свернуть">×</button></div><div class="panel-body">
+<div id="memoryExperiment" class="experiment-view">
+<button id="scenarioFiveButton" class="primary-button memory-scenario-button" type="button">Сценарий 5 сообщений</button>
+<div id="memoryLayers" class="memory-layers"></div>
+<form id="memoryForm" class="memory-form">
+  <select id="memoryLayer" class="strategy-select"><option value="WORKING">Рабочая</option><option value="LONG_TERM">Долговременная</option></select>
+  <input id="memoryKey" class="memory-input" placeholder="ключ" autocomplete="off">
+  <input id="memoryValue" class="memory-input" placeholder="значение" autocomplete="off">
+  <button class="primary-button small-button" type="submit">Сохранить в память</button>
+</form>
+<div class="memory-rules">Правило промпта: краткосрочная — все сообщения сессии; рабочая и долговременная — отдельными system-блоками. Facts Дня 10 заранее перенесены в долговременную память.</div>
+
+
+<label class="switch-row"><span>Стратегия</span><select id="strategySelect" class="strategy-select"><option value="SUMMARY">Summary (Day 9)</option><option value="SLIDING">Sliding Window</option><option value="FACTS">Sticky Facts</option></select></label>
+<small id="compressionHint" class="muted-small">Summary: старые сообщения сжимаются в summary. Sliding/Facts: полная последняя часть диалога.</small>
+
+<div class="scenario-buttons"><button id="scenarioButton" class="primary-button small-button" type="button">Запустить сценарий</button></div>
+<p class="muted-small">10 контекстных сообщений с деталями + 5 контрольных вопросов. Сценарий запускается в новой сессии.</p>
+<div id="scenarioStatus" class="scenario-status">Готов к запуску.</div>
+<div class="memory-grid"><details id="summaryPanel" class="summary-panel" open><summary>Summary истории</summary><pre id="summaryText">Пока пусто</pre></details><details id="factsPanel" class="summary-panel"><summary>Facts (key-value)</summary><pre id="factsText">Пока пусто</pre></details></div>
+
+
+<div class="experiment-result"><div class="result-title">Результат эксперимента</div><div id="scenarioResult" class="scenario-result"><span class="muted-small">Запусти сценарий, чтобы проверить ключевые детали.</span></div></div>
+</div>
+<div id="profileExperiment" class="experiment-view" hidden>
+<button id="profileScenarioButton" class="primary-button memory-scenario-button" type="button">Сценарий профилей</button>
+<div id="profileScenarioStatus" class="scenario-status">Готов к запуску.</div>
+<label class="profile-enabled"><input id="profileEnabledToggle" type="checkbox" checked> Профили включены</label>
+<div class="profile-switch-row"><label class="switch-row"><span>Профиль</span><select id="profileSelect" class="strategy-select"></select></label><button id="newProfileButton" class="secondary-button small-button" type="button">Новый профиль</button></div>
+<div class="profile-fields">
+<label>Имя<input id="profileName" class="memory-input"></label>
+<label>Длина<input id="profileLength" class="memory-input"></label>
+<label>Тон<input id="profileTone" class="memory-input"></label>
+<label>Код<input id="profileCode" class="memory-input"></label>
+<label>Ограничения<textarea id="profileRestrictions" rows="2" class="memory-input"></textarea></label>
+</div>
+<div class="profile-actions"><button id="saveProfileButton" class="secondary-button small-button" type="button">Сохранить профиль</button><button id="deleteProfileButton" class="secondary-button small-button danger-button" type="button">Удалить профиль</button></div>
+<div id="profileStatus" class="scenario-status">Профиль загружается…</div>
+<div class="memory-rules">Профиль добавляется в каждый запрос отдельным system-блоком и пополняется из диалога. Профиль находится над слоями памяти и не отключается вместе с долговременным слоем.</div>
+</div>
+<div class="token-panel compact-token"><div class="token-head"><span class="panel-kicker">Токены</span><span id="tokenLimit">—</span></div><div class="token-grid"><span>Контекст <b id="historyTokens">—</b></span><span>Ответ <b id="responseTokens">—</b></span><span>Сессия <b id="totalTokens">—</b></span><span>Стоимость <b id="sessionCost">—</b></span></div><div class="context-bar"><span id="contextFill"></span></div><span id="tokenFoot" class="token-foot">—</span></div>
+<div id="profileResultSection" class="profile-result-section" hidden><div class="result-title">Результаты эксперимента</div><div id="profileScenarioResult" class="profile-result-simple"></div></div>
+</div></aside>
+</div>
+
+<div id="reportOverlay" class="report-overlay" hidden>
+  <div class="report-modal" role="dialog" aria-modal="true" aria-labelledby="reportTitle">
+    <div class="report-modal-head"><h2 id="reportTitle">Итоговый отчет по экспериментам</h2><button id="reportClose" class="icon-button" type="button" title="Закрыть">×</button></div>
+    <div class="report-scroll">
+      <table class="report-table"><thead><tr><th>Стратегия</th><th>Деталей сохранено</th><th>Токены</th><th>Сложность</th></tr></thead><tbody id="reportBody"></tbody></table>
+      <div id="reportConclusion" class="report-conclusion"></div>
+    </div>
+  </div>
+</div>
+<footer class="footer"><span>AI Advent Challenge · Day 12</span><span>3-pane agent workspace</span></footer>
+</body></html>
