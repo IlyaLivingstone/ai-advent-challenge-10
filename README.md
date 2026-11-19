@@ -95,3 +95,11 @@ Sliding Window, Sticky Facts и Summary + ветвление диалога с �
 - [Код и инструкция](day12_personalization/README.md)
 - [Видеодемонстрация](day12_personalization/demo12.mp4)
 - Отдельный сервис: `http://localhost:8090/`
+
+### Задание 13. Состояние задачи (Task State Machine)
+
+Кодовый конечный автомат задачи `planning → execution → validation → done` с возвратом `validation → execution` при провале: текущий шаг и ожидаемое действие, пауза/продолжение, запрещённые переходы отклоняются с `409` без изменения состояния; память и профили сохранены.
+
+- [Код и инструкция](day13_task_state/README.md)
+- [Видеодемонстрация](day13_task_state/demo13.mp4)
+- Отдельный сервис: `http://localhost:8091/`
